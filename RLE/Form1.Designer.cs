@@ -42,13 +42,15 @@ namespace RLE
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(12, 28);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(331, 277);
+            this.textBox1.Size = new System.Drawing.Size(331, 261);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "00009000009090009000900000900900090000000000909090000900090090009009009090090000";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.MouseLeave += new System.EventHandler(this.textBox1_MouseLeave);
+            this.textBox1.MouseHover += new System.EventHandler(this.textBox1_MouseHover);
             // 
             // button1
             // 
@@ -108,11 +110,13 @@ namespace RLE
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(350, 13);
+            this.textBox2.Location = new System.Drawing.Point(350, 28);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(865, 400);
+            this.textBox2.Size = new System.Drawing.Size(865, 385);
             this.textBox2.TabIndex = 8;
+            this.textBox2.MouseLeave += new System.EventHandler(this.textBox2_MouseLeave);
+            this.textBox2.MouseHover += new System.EventHandler(this.textBox2_MouseHover);
             // 
             // numericUpDown1
             // 
@@ -139,8 +143,8 @@ namespace RLE
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1244, 450);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.textBox2);

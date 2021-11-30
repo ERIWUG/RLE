@@ -164,5 +164,80 @@ namespace RLE
         {
             
         }
+
+        private async void textBox1_MouseHover(object sender, EventArgs e)
+        {
+            string k = "Впишите сюда исходную строку";
+            Label l1 = new Label();
+            l1.AutoSize = true;
+            l1.Location = new System.Drawing.Point(79, 8);
+            l1.Name = "l1";
+            l1.Size = new System.Drawing.Size(211, 17);
+            l1.TabIndex = 11;
+            Controls.Add(l1);
+            for (int i = 0; i < k.Length; i++)
+            {
+                l1.Text += k[i];
+                await Task.Delay(50);
+            }
+            
+
+        }
+
+        
+
+        
+
+        
+
+        private async void textBox1_MouseLeave(object sender, EventArgs e)
+        {
+            try
+            {
+                Label l1 = Controls.Find("l1", true)[0] as Label;
+                int k = l1.Text.Length;
+                for (int i = k; i > 1; i--)
+                {
+                    l1.Text = l1.Text.Substring(0, i - 1);
+                    await Task.Delay(50);
+                }
+
+                Controls.Remove(Controls.Find("l1", true)[0]);
+            }
+            catch { };
+        }
+
+        private async void textBox2_MouseHover(object sender, EventArgs e)
+        {
+            Label l2 = new Label();
+            l2.AutoSize = true;
+            l2.Location = new System.Drawing.Point(366, 5);
+            l2.Name = "l2";
+            l2.Size = new System.Drawing.Size(24, 17);
+            string k = "Тут будет происходить нужное вам действие";
+            l2.TabIndex = 11;
+            Controls.Add(l2);
+            for (int i = 0; i < k.Length; i++)
+            {
+                l2.Text += k[i];
+                await Task.Delay(50);
+            }
+        }
+
+        private async void textBox2_MouseLeave(object sender, EventArgs e)
+        {
+            try
+            {
+                Label l2 = Controls.Find("l2", true)[0] as Label;
+                int k = l2.Text.Length;
+                for (int i = k; i > 1; i--)
+                {
+                    l2.Text = l2.Text.Substring(0, i - 1);
+                    await Task.Delay(50);
+                }
+                Controls.Remove(Controls.Find("l2", true)[0]);
+            }
+            catch { };
+        }
     }
 }

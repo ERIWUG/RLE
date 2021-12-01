@@ -27,143 +27,71 @@ namespace RLE
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+       
         public int min(int a,int b)
         {
             return a < b ? a : b;
         }
-
+        
         private async void button1_Click(object sender, EventArgs e)
         {
-            if (radioButton2.Checked)
+            string k = textBox1.Text;
+            string s = "↑";
+            string res = "";
+            string pr = k.Substring(0, 1);
+            int kol = 1;
+
+            for (int i = 1; i < k.Length; i++)
             {
-                string k = textBox1.Text;
-                string res = "";
-                string pr = k.Substring(0, 1);
-                int kol = 1;
-                int prev_kol = 0;
-                for (int i = 1; i < k.Length; i++)
+                textBox2.Text = textBox1.Text + "\r\n" + s + "\r\n" + res;
+
+                s = "  " + s.Substring(0);
+                if (k.Substring(i, 1) == pr) { kol += 1; }
+                else
                 {
-                    if (k.Substring(i, 1) == pr) { kol += 1; }
-                    else
+                    while (kol > 0)
                     {
-                        if (prev_kol == 1) { res += pr; }
-                        else { res += Convert.ToString(kol) + pr; }
-                        pr = k.Substring(i, 1);
-                        prev_kol = kol;
-                        kol = 1;
+                        res += Convert.ToString(min(kol, 9)) + pr;
+                        kol -= min(kol, 9);
                     }
+
+                    pr = k.Substring(i, 1);
+
+                    kol = 1;
                 }
-                if (prev_kol == 1) { res += pr; }
-                else { res += Convert.ToString(kol) + pr; }
-                textBox2.Text = res;
-                
+                await Task.Delay(Convert.ToInt32(numericUpDown1.Value * 100));
             }
-            else if(radioButton1.Checked)
+
+            while (kol > 0)
             {
-                string k = textBox1.Text;
-                string s = "↑";
-                string res = "";
-                string pr = k.Substring(0, 1);
-                int kol = 1;
-                
-                for (int i = 1; i < k.Length; i++)
-                {
-                    textBox2.Text = textBox1.Text + "\r\n" + s+"\r\n"+res;
-                    
-                    s = "  " + s.Substring(0);
-                    if (k.Substring(i, 1) == pr) { kol += 1; }
-                    else
-                    {
-                        while (kol > 0)
-                        {
-                            res += Convert.ToString(min(kol, 9)) + pr;
-                            kol -= min(kol, 9);
-                        }
-
-                        pr = k.Substring(i, 1);
-                        
-                        kol = 1;
-                    }
-                    await Task.Delay(Convert.ToInt32(numericUpDown1.Value*100));
-                }
-
-                while (kol > 0)
-                {
-                    res += Convert.ToString(min(kol, 9)) + pr;
-                    kol -= min(kol, 9);
-                }
-                textBox2.Text = res;
+                res += Convert.ToString(min(kol, 9)) + pr;
+                kol -= min(kol, 9);
             }
-            else
-            {
-                string k = "↑";
-                
-                for(int i = 0; i <textBox1.Text.Length; i++)
-                {
-                    textBox2.Text = textBox1.Text + "\r\n" + k;
-                    k = "  " + k.Substring(0);
-                    await Task.Delay(300);
-                }
-             
-            }
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-    
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
+            textBox2.Text = res;
 
         }
 
         private async void button2_Click(object sender, EventArgs e)
         {
+            string k = textBox1.Text;
+            string s = "↑";
+            string res = "";
 
-            if (radioButton1.Checked)
+
+            for (int i = 0; i < k.Length - 1; i += 2)
             {
-                string k = textBox1.Text;
-                string s = "↑";
-                string res="";
-                for (int i = 0; i < k.Length-1; i+=2)
+                for (int j = Convert.ToInt32(k.Substring(i, 1)); j > 0; j--)
                 {
-                    for(int j = Convert.ToInt32(k.Substring(i, 1)); j > 0; j--)
-                    {
-                        s= "  " + s.Substring(0);
-                        res += k.Substring(i + 1, 1);
-                    }
-                    textBox2.Text = k + "\r\n" + s + "\r\n" + res;
-                    await Task.Delay(Convert.ToInt32(numericUpDown1.Value * 100));
+                    s = "  " + s.Substring(0);
+                    res += k.Substring(i + 1, 1);
                 }
-                textBox2.Text = res;
+                textBox2.Text = k + "\r\n" + s + "\r\n" + res;
+                await Task.Delay(Convert.ToInt32(numericUpDown1.Value * 100));
             }
+            textBox2.Text = res;
+
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            
-        }
 
         private async void textBox1_MouseHover(object sender, EventArgs e)
         {
@@ -183,13 +111,6 @@ namespace RLE
             
 
         }
-
-        
-
-        
-
-        
-
         private async void textBox1_MouseLeave(object sender, EventArgs e)
         {
             try
@@ -239,5 +160,22 @@ namespace RLE
             }
             catch { };
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form f = new Form();
+            f.AutoSize = true;
+            WebBrowser wb1 = new WebBrowser();
+            wb1.Location = new System.Drawing.Point(10, 10);
+            wb1.MinimumSize = new System.Drawing.Size(20, 20);
+            wb1.Name = "webBrowser1";
+            wb1.Size = new System.Drawing.Size(456, 288);
+            wb1.TabIndex = 12;
+            wb1.Url = new System.Uri("file:///C:/Users/ebely/Desktop/KURSACH/RLE/RLE/info.html", System.UriKind.Absolute);
+            f.Controls.Add(wb1);
+            f.Show();
+        }
+
+        
     }
 }
